@@ -4,7 +4,7 @@
 Create an interactive business intelligence dashboard in Power BI that demonstrates your ability to visualize data and deliver business insights.
 
 ## Your Task
-Build a Power BI report (`/analytics/report.pbix`) connecting to your Gold layer tables through DuckDB.
+Build a Power BI report (`/analytics/report.pbix`) connecting to your Gold layer tables through DuckDB. You will need to create appropriate DAX measures based on the pseudo-code provided.
 
 ## Requirements
 
@@ -23,48 +23,90 @@ Build a Power BI report (`/analytics/report.pbix`) connecting to your Gold layer
 
 ### 2. DAX Measures
 
-Create a measures table with business KPIs:
+Create a measures table with business KPIs based on these specifications:
 
-**Sales Metrics:**
-```dax
-Total Sales = SUM(fct_sales[net_amount])
-Total Quantity = SUM(fct_sales[quantity])
-Average Order Value = DIVIDE([Total Sales], DISTINCTCOUNT(fct_sales[order_id]))
+**Sales Metrics (implement these measures):**
+```
+Total Sales:
+    - Sum the net_amount from fact sales table
+    
+Total Quantity:
+    - Sum the quantity from fact sales table
+    
+Average Order Value:
+    - Calculate total sales divided by distinct count of orders
+    - Handle division by zero
 ```
 
-**Growth Metrics:**
-```dax
-Sales YTD = TOTALYTD([Total Sales], dim_date[date])
-Sales MTD = TOTALMTD([Total Sales], dim_date[date])
-YoY Growth % = 
-    VAR CurrentYear = [Total Sales]
-    VAR PreviousYear = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(dim_date[date]))
-    RETURN DIVIDE(CurrentYear - PreviousYear, PreviousYear)
+**Growth Metrics (implement these measures):**
+```
+Sales Year-to-Date:
+    - Calculate cumulative sales from start of year to current date
+    - Use time intelligence functions with your date dimension
+    
+Sales Month-to-Date:
+    - Calculate cumulative sales from start of month to current date
+    
+Year-over-Year Growth %:
+    - Compare current period sales to same period last year
+    - Calculate percentage change
+    - Handle missing prior year data
+    
+Rolling 30-Day Average:
+    - Calculate average daily sales over last 30 days
+    - Use date functions to create rolling window
 ```
 
-**Operational Metrics:**
-```dax
-Return Rate = DIVIDE(SUM(fct_returns[quantity]), SUM(fct_sales[quantity]))
-Avg Delivery Days = AVERAGE(fct_shipments[delivery_days])
-On-Time Delivery % = DIVIDE(
-    COUNTROWS(FILTER(fct_shipments, fct_shipments[on_time_flag] = TRUE)),
-    COUNTROWS(fct_shipments)
-)
+**Customer Metrics (implement these measures):**
+```
+Active Customers:
+    - Count distinct customers with orders in period
+    
+Customer Lifetime Value:
+    - Calculate average total spend per customer
+    - Consider only customers with complete history
+    
+New vs Returning Ratio:
+    - Identify first-time buyers vs repeat customers
+    - Calculate ratio for selected period
+    
+VIP Revenue Contribution:
+    - Calculate percentage of revenue from VIP customers
 ```
 
-**Data Quality Metrics:**
-```dax
-Data Freshness Hours = 
-    DATEDIFF(
-        MAX(fct_ingestion_audit[processed_at]),
-        NOW(),
-        HOUR
-    )
-Rejection Rate = 
-    DIVIDE(
-        SUM(fct_ingestion_audit[rows_rejected]),
-        SUM(fct_ingestion_audit[rows_processed])
-    )
+**Operational Metrics (implement these measures):**
+```
+Return Rate:
+    - Calculate returned quantity divided by sold quantity
+    - Express as percentage
+    
+Average Delivery Days:
+    - Calculate days between ship and delivery dates
+    - Exclude in-transit shipments
+    
+On-Time Delivery Rate:
+    - Count shipments delivered within SLA
+    - Divide by total delivered shipments
+    - Express as percentage
+    
+Inventory Turnover:
+    - Calculate sales divided by average inventory value
+    - Annualize if needed
+```
+
+**Data Quality Metrics (implement these measures):**
+```
+Data Freshness:
+    - Calculate hours since last data refresh
+    - Use current time and max ingestion timestamp
+    
+Rejection Rate:
+    - Calculate rejected rows divided by total processed
+    - Track by table and time period
+    
+Completeness Score:
+    - Calculate percentage of non-null critical fields
+    - Weight by importance
 ```
 
 ### 3. Report Pages

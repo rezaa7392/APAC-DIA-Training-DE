@@ -23,6 +23,23 @@ This bundle contains:
 ## Getting Started
 
 1. **Setup Environment**
+
+Using uv (recommended - faster):
+```bash
+# Install uv if you haven't already
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Create virtual environment and install dependencies
+uv venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+uv pip install -r requirements.txt
+
+# Create required directories
+mkdir -p lake duckdb analytics data_raw
+mkdir -p lake/bronze/parquet lake/bronze/delta lake/_rejects
+```
+
+Or using traditional pip:
 ```bash
 # Create and activate virtual environment
 python -m venv .venv

@@ -1,10 +1,10 @@
 # Exercise 5: Gold Dimensional Model
 
 ## Objective
-Design and implement a star schema in the Gold layer optimized for business intelligence and analytics.
+Extend your dbt project to build a star schema in the Gold layer, optimized for business intelligence and analytics.
 
 ## Your Task
-Create dimension and fact tables in `/dbt/models/gold/` following dimensional modeling best practices.
+Building on your Silver layer models, create dimension and fact tables in `/dbt/models/gold/` following dimensional modeling best practices.
 
 ## Requirements
 
@@ -102,25 +102,75 @@ Create user-friendly views that:
 5. **Sparse Dimensions**: Handle optional relationships
 
 ### Sample Model Structure
+
+Build your Gold models on top of Silver layer:
 ```sql
 -- models/gold/dimensions/dim_customer.sql
-WITH customers_cleaned AS (
-    SELECT * FROM {{ ref('stg_customers') }}
+{{
+    config(
+        materialized='table',
+        schema='gold'
+    )
+}}
+
+WITH silver_customers AS (
+    -- Reference your Silver layer model
+    SELECT * FROM {{ ref('silver_customers') }}
 ),
-customers_masked AS (
+customers_enhanced AS (
     SELECT
         customer_id,
+        -- Apply GDPR masking
         CASE 
             WHEN gdpr_consent = false THEN 'MASKED'
             ELSE email
         END AS email,
-        -- more masking logic
-    FROM customers_cleaned
+        -- Add derived attributes
+        EXTRACT(YEAR FROM AGE(CURRENT_DATE, birth_date)) AS customer_age,
+        CURRENT_DATE - join_date AS customer_lifetime_days,
+        -- more transformations
+    FROM silver_customers
 )
 SELECT 
     {{ dbt_utils.surrogate_key(['customer_id']) }} AS customer_sk,
     * 
-FROM customers_masked
+FROM customers_enhanced
+```
+
+For fact tables, aggregate from Silver:
+```sql
+-- models/gold/facts/fct_sales.sql
+{{
+    config(
+        materialized='incremental',
+        unique_key='sale_id',
+        on_schema_change='merge'
+    )
+}}
+
+WITH silver_orders AS (
+    SELECT * FROM {{ ref('silver_orders') }}
+    {% if is_incremental() %}
+        WHERE ingestion_ts > (SELECT MAX(ingestion_ts) FROM {{ this }})
+    {% endif %}
+),
+silver_order_lines AS (
+    SELECT * FROM {{ ref('silver_order_lines') }}
+),
+joined_data AS (
+    -- Join and transform Silver tables
+    SELECT 
+        ol.order_id || '-' || ol.line_number AS sale_id,
+        o.order_date,
+        o.customer_id,
+        ol.product_id,
+        -- Calculate metrics
+        ol.qty * ol.unit_price AS gross_amount,
+        -- more calculations
+    FROM silver_order_lines ol
+    JOIN silver_orders o ON ol.order_id = o.order_id
+)
+SELECT * FROM joined_data
 ```
 
 ### Performance Optimization
