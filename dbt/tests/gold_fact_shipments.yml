@@ -1,0 +1,92 @@
+version: 2
+
+models:
+  - name: fact_shipments
+    description: "A fact table at the grain of a single shipment. Links shipments to orders and other dimensions."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: shipment_id
+        description: "The unique identifier for a shipment. Primary key."
+        data_type: bigint
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        description: "The order identifier associated with the shipment. Foreign key to stg_shipments and fct_sales."
+        data_type: bigint
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_shipments')
+              field: order_id
+          - relationships:
+              to: ref('fct_sales')
+              field: order_id
+
+      - name: customer_sk
+        description: "Surrogate key for the customer. Foreign key to dim_customer."
+        data_type: varchar
+        tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: store_sk
+        description: "Surrogate key for the store. Foreign key to dim_store."
+        data_type: varchar
+        tests:
+          - relationships:
+              to: ref('dim_store')
+              field: store_sk
+
+      - name: shipped_date_sk
+        description: "Surrogate key for the date the shipment was shipped. Foreign key to dim_date."
+        data_type: DATE
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date
+
+      - name: delivered_date_sk
+        description: "Surrogate key for the date the shipment was delivered. Foreign key to dim_date."
+        data_type: DATE
+        tests:
+          - relationships:
+              to: ref('dim_date')
+              field: date
+
+      - name: carrier
+        description: "The shipping carrier. A degenerate dimension."
+        data_type: varchar
+
+      - name: ship_cost
+        description: "The cost of the shipment in local currency."
+        data_type: decimal(18,2)
+
+      - name: delivery_days
+        description: "The number of days between the shipment and delivery timestamps. Used to assess delivery performance."
+        data_type: BIGINT
+
+      - name: on_time_flag
+        description: "A boolean flag indicating if the shipment was delivered within the SLA (assumed to be <= 5 days)."
+        data_type: boolean
+        tests:
+          - not_null
+          - accepted_values:
+              values: [true, false]  
+      
+      - name: shipped_at
+        description: "The timestamp the shipment was shipped."
+        data_type: timestamp
+
+      - name: delivered_at
+        description: "The timestamp the shipment was delivered."
+        data_type: timestamp
+
+      - name: ingestion_ts
+        description: "The timestamp when the record was ingested into the Bronze layer."
+        data_type: timestamp

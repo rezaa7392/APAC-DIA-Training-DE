@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_exchange_rates
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: date
+        data_type: DATE
+        tests: [not_null]
+
+      - name: currency
+        data_type: VARCHAR
+        tests: [not_null]
+
+      - name: rate_to_aud
+        data_type: DOUBLE
+
+      - name: ingestion_ts
+        data_type: TIMESTAMP
+      - name: src_filename
+        data_type: VARCHAR
+      - name: src_row_hash
+        data_type: VARCHAR

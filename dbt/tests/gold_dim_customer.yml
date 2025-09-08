@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "Customer dimension with GDPR masking and city-level address generalization."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: customer_sk
+        description: "Surrogate key for the customer dimension."
+        data_type: varchar
+        tests: [unique, not_null]
+
+      - name: customer_id
+        description: "Business key from source systems."
+        data_type: bigint
+        tests: [not_null]
+
+      - name: natural_key
+        data_type: varchar
+
+      - name: first_name
+        data_type: varchar
+
+      - name: last_name
+        data_type: varchar
+
+      - name: email
+        description: "Plain or hashed (when gdpr_consent = false)."
+        data_type: varchar
+
+      - name: phone
+        description: "Plain or masked (when gdpr_consent = false)."
+        data_type: varchar
+
+      - name: address_line1
+        data_type: varchar
+
+      - name: address_line2
+        data_type: varchar
+
+      - name: city
+        description: "Always retained, even when address is generalized."
+        data_type: varchar
+        tests: [not_null]
+
+      - name: state_region
+        data_type: varchar
+
+      - name: postcode
+        description: "Null when consent is false (generalized)."
+        data_type: varchar
+
+      - name: country_code
+        data_type: varchar
+
+      - name: birth_date
+        data_type: date
+
+      - name: join_ts
+        data_type: timestamp
+
+      - name: customer_lifetime_days
+        data_type: integer
+
+      - name: customer_age
+        data_type: integer
+
+      - name: customer_segment
+        description: "Derived from VIP flag and join date (VIP/New/Standard)."
+        data_type: varchar
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['VIP','New','Standard']
+
+      - name: is_vip
+        data_type: boolean
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: gdpr_consent
+        data_type: boolean
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]

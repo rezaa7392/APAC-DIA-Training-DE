@@ -1,0 +1,94 @@
+version: 2
+
+models:
+  - name: fact_sensor_readings
+    description: "A fact table tracking hourly sensor readings and performance metrics."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: sensor_reading_sk
+        description: "A unique surrogate key for each hourly sensor reading."
+        data_type: varchar
+        tests:
+          - unique
+          - not_null
+
+      - name: sensor_hour_ts
+        description: "The timestamp truncated to the hour, representing the start of the hourly reading interval."
+        data_type: timestamp
+        tests:
+          - not_null
+      
+      - name: store_id
+        description: "The unique identifier of the store where the sensor is located."
+        data_type: bigint
+        tests:
+          - not_null
+
+      - name: store_sk
+        description: "A surrogate key for the store, linking to the dim_store dimension."
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_store')
+              field: store_sk
+
+      - name: shelf_id
+        description: "The unique identifier of the shelf associated with the sensor."
+        data_type: bigint
+        tests:
+          - not_null
+          
+
+      - name: temperature_anomaly_flag
+        description: "A boolean flag indicating if the average hourly temperature is outside the acceptable range (0°C to 50°C)."
+        data_type: boolean
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: humidity_anomaly_flag
+        description: "A boolean flag indicating if the average hourly humidity is outside the acceptable range (0% to 100%)."
+        data_type: boolean
+        tests:
+          - accepted_values:
+              values: [true, false]
+
+      - name: battery_anomaly_flag
+        description: "A boolean flag indicating if the average hourly battery voltage is below the operational threshold (assumed to be 2000mV)."
+        data_type: boolean
+        tests:
+          - accepted_values:
+              values: [true, false]
+              
+      - name: avg_temperature_c
+        description: "The average temperature in Celsius for the hour."
+        data_type: double
+
+      - name: avg_humidity_pct
+        description: "The average humidity percentage for the hour."
+        data_type: double
+
+      - name: avg_battery_mv
+        description: "The average battery voltage in millivolts for the hour."
+        data_type: double
+        
+      - name: rolling_avg_24h_temperature_c
+        description: "The 24-hour rolling average temperature in Celsius."
+        data_type: double
+
+      - name: rolling_avg_24h_humidity_pct
+        description: "The 24-hour rolling average humidity percentage."
+        data_type: double
+        
+      - name: rolling_avg_24h_battery_mv
+        description: "The 24-hour rolling average battery voltage in millivolts."
+        data_type: double
+
+      - name: latest_ingestion_ts
+        description: "The timestamp of the most recent ingestion for the sensor readings in this hour."
+        data_type: timestamp
+        tests:
+          - not_null

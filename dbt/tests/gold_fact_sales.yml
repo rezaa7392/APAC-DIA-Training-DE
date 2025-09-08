@@ -1,0 +1,151 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: "Fact table containing sales transaction data at the order line level. Grain: One row per order line."
+    config:
+      contract:
+        enforced: true
+      tags: ['gold', 'fact']
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - line_number
+
+    columns:
+      - name: order_id
+        description: "The unique identifier for the order (business key)."
+        data_type: bigint
+        tests:
+          - not_null
+      
+      - name: line_number
+        description: "The line number within a given order (part of the composite primary key)."
+        data_type: int
+        tests:
+          - not_null
+      
+      - name: order_number
+        description: "Degenerate dimension: A business key to the order, stored directly in the fact table."
+        data_type: BIGINT
+        tests:
+          - not_null
+
+      - name: customer_sk
+        description: "Foreign key to the customer dimension."
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_sk
+
+      - name: store_sk
+        description: "Foreign key to the store dimension."
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_store')
+              field: store_sk
+
+      - name: date_sk
+        description: "Foreign key to the date dimension."
+        data_type: date
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_date')
+              field: date
+
+      - name: product_scd_sk
+        description: "Foreign key to the slowly changing product dimension (SCD Type 2)."
+        data_type: varchar
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product_scd')
+              field: product_scd_sk
+
+      - name: qty
+        description: "The quantity of the product sold."
+        data_type: int
+        tests:
+          - not_null
+          
+
+      - name: unit_price
+        description: "The price per unit of the product."
+        data_type: decimal(18,2)
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: ">= 0"
+
+      - name: gross_amount
+        description: "The total sales amount before any discounts or taxes."
+        data_type: decimal(18,2)
+        tests:
+          - not_null
+
+      - name: discount_amount
+        description: "The total discount applied to the line."
+        data_type: decimal(18,2)
+
+      - name: net_amount_before_tax
+        description: "The total amount after discounts, but before tax."
+        data_type: decimal(18,2)
+
+      - name: tax_amount
+        description: "The total tax amount on the line."
+        data_type: decimal(18,2)
+
+      - name: net_amount
+        description: "The total sales amount after discounts and tax (final line total)."
+        data_type: decimal(18,2)
+        tests:
+          - not_null
+
+      - name: line_total
+        description: "The final line total, including all discounts and taxes."
+        data_type: decimal(18,2)
+        tests:
+          - not_null
+
+      - name: net_amount_aud
+        description: "The net amount converted to AUD."
+        data_type: decimal(18,2)
+
+      - name: order_ts
+        description: "The timestamp of the order."
+        data_type: timestamp
+        tests:
+          - not_null
+
+      - name: order_currency
+        description: "The currency of the order at the time of purchase."
+        data_type: varchar
+        tests:
+          - not_null
+
+      - name: channel
+        description: "The sales channel through which the order was placed (e.g., online, in-store)."
+        data_type: varchar
+
+      - name: payment_method
+        description: "The payment method used for the order (e.g., credit card, cash)."
+        data_type: varchar
+       
+      - name: coupon_code
+        description: "The coupon code applied to the order, if any."
+        data_type: varchar
+
+      - name: shipping_fee
+        description: "The shipping fee charged for the order."
+        data_type: decimal(18,2)
+
+      - name: ingestion_ts
+        description: "Timestamp when the record was ingested into the warehouse."
+        data_type: timestamp

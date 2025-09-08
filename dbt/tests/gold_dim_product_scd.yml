@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: dim_product_scd
+    description: "Slowly Changing Dimension (SCD Type 2) for products, sourced from the `products_snapshot`."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: product_scd_sk
+        description: "Surrogate key for the product SCD. This key changes with each version of a product."
+        data_type: varchar
+        tests: [unique, not_null]
+
+      - name: product_id
+        description: "The business key from the source system for the product."
+        data_type: bigint
+        tests: [not_null]
+        
+      - name: name
+        description: "The name of the product."
+        data_type: varchar
+
+      - name: category
+        description: "The category of the product."
+        data_type: varchar
+        
+
+      - name: current_price
+        description: "The price of the product at the time of the record's validity."
+        data_type: DECIMAL(18,2)
+
+      - name: subcategory
+        description: "A description of the product."
+        data_type: varchar
+
+      - name: currency
+        description: "The currency in which the product price is denominated."
+        data_type: varchar
+
+      - name: is_discontinued
+        description: "A flag indicating if the product is currently discontinued."
+        data_type: boolean
+
+      - name: effective_from_date
+        description: "The start date from which this version of the product record is valid."
+        data_type: timestamp
+        tests: [not_null]
+
+      - name: effective_to_date
+        description: "The end date until which this version of the product record was valid. Null for the current record."
+        data_type: timestamp
+
+      - name: is_current
+        description: "A flag indicating if this is the most current version of the product."
+        data_type: boolean
+        tests:
+          - accepted_values:
+              arguments:
+                values: [true, false]
+
+      - name: price_change_indicator
+        description: "Indicates if the price changed from the previous version ('Price Increased', 'Price Decreased', or 'No Price Change')."
+        data_type: varchar
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Price Increased', 'Price Decreased', 'No Price Change']
