@@ -148,7 +148,7 @@ cython_debug/
 #data_raw/
 #lake/
 #duckdb/
-analytics/*.pbix
+#analytics/*.pbix
 #*.duckdb
 #*.duckdb.wal
 
