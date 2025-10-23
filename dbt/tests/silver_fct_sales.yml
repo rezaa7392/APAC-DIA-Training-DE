@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: fct_sales
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: order_id
+        data_type: BIGINT
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders_header')
+                field: order_id
+
+      - name: line_number
+        data_type: INTEGER
+        tests: [not_null]
+
+      - name: customer_id
+        data_type: BIGINT
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+
+      - name: store_id
+        data_type: BIGINT
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_stores')
+                field: store_id
+
+      - name: order_ts
+        data_type: TIMESTAMP
+      - name: order_currency
+        data_type: VARCHAR
+
+      - name: product_id
+        data_type: BIGINT
+        tests:
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+
+      - name: product_name
+        data_type: VARCHAR
+      - name: category
+        data_type: VARCHAR
+      - name: subcategory
+        data_type: VARCHAR
+
+
+      - name: qty
+        data_type: INTEGER
+      - name: unit_price
+        data_type: DECIMAL(18,2)
+      - name: line_gross_amount
+        data_type: DECIMAL(18,2)
+      - name: line_net_before_tax
+        data_type: DECIMAL(18,2)
+      - name: line_total_amount
+        data_type: DECIMAL(18,2)
+
+      - name: rate_to_aud
+        data_type: DOUBLE
+      - name: line_total_amount_aud
+        data_type: DECIMAL(18,2)
+
+      - name: ingestion_ts
+        data_type: TIMESTAMP
+      - name: src_filename
+        data_type: VARCHAR
+      - name: src_row_hash
+        data_type: VARCHAR

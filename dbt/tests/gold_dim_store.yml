@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: dim_store
+    description: "Store dimension with derived attributes and operational status."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: store_sk
+        description: "Surrogate key for the store dimension."
+        data_type: varchar
+        tests: [unique, not_null]
+
+      - name: store_id
+        description: "Business key from source systems."
+        data_type: bigint
+        tests: [not_null]
+
+      - name: store_code
+        description: "The unique natural key for the store."
+        data_type: varchar
+        tests: [unique, not_null]
+
+      - name: name
+        description: "Name of the store."
+        data_type: varchar
+        
+      - name: channel
+        description: "The sales channel (e.g., 'online' or 'physical')."
+        data_type: varchar
+        
+      - name: region
+        description: "The geographical region of the store."
+        data_type: varchar
+
+      - name: state
+        description: "The state where the store is located."
+        data_type: varchar
+
+      - name: latitude
+        description: "Geographic latitude of the store."
+        data_type: double
+
+      - name: longitude
+        description: "Geographic longitude of the store."
+        data_type: double
+        
+      - name: open_dt
+        description: "The date the store opened."
+        data_type: date
+
+      - name: close_dt
+        description: "The date the store closed (NULL if still open)."
+        data_type: date
+
+      - name: store_age_days
+        description: "The number of days the store has been open."
+        data_type: integer
+        
+      - name: operational_status
+        description: "Current operational status of the store (Open or Closed)."
+        data_type: varchar
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Open', 'Closed']
+                
+      - name: store_size_category
+        description: "A derived category for the store size based on its channel."
+        data_type: varchar
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Small', 'Large', 'Unknown']

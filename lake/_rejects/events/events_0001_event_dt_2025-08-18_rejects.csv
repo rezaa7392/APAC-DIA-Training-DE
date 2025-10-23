@@ -1,0 +1,2 @@
+reject_reason,src_filename,raw_line
+malformed_json,data_raw\events\event_dt=2025-08-18\events_0001.jsonl,{bad_json_line

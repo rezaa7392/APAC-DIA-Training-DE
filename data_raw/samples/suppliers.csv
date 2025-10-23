@@ -1,0 +1,160 @@
+supplier_id,supplier_code,name,country_code,lead_time_days,preferred
+1,SUP-00001,Alvarez, Gomez and Dickerson,AU,9,True
+2,SUP-00002,Smith LLC,AU,7,False
+3,SUP-00003,Smith-Foster,AU,7,False
+4,SUP-00004,Kim, Watson and Brown,AU,9,False
+5,SUP-00005,Flores PLC,AU,7,False
+6,SUP-00006,Conner Ltd,AU,7,False
+7,SUP-00007,Silva, Fritz and Montgomery,AU,10,False
+8,SUP-00008,Mullins, Johns and Campbell,AU,8,False
+9,SUP-00009,Jackson, Singleton and Russell,AU,16,False
+10,SUP-00010,Reyes and Sons,AU,1,True
+11,SUP-00011,Wilson, Roberts and Hartman,AU,14,False
+12,SUP-00012,Smith, Zhang and Mitchell,AU,14,False
+13,SUP-00013,Smith, Smith and Parker,AU,1,False
+14,SUP-00014,Lang Ltd,AU,8,False
+15,SUP-00015,Malone-Simpson,AU,8,False
+16,SUP-00016,Compton-Martin,AU,4,False
+17,SUP-00017,James, Miller and Smith,AU,6,False
+18,SUP-00018,Jones-West,AU,5,False
+19,SUP-00019,Wilson, Davies and Mason,AU,17,False
+20,SUP-00020,Johnson-Arroyo,AU,13,False
+21,SUP-00021,Bartlett-Greer,AU,15,False
+22,SUP-00022,Moran PLC,AU,12,False
+23,SUP-00023,Neal Inc,AU,5,False
+24,SUP-00024,Martinez LLC,AU,7,False
+25,SUP-00025,Taylor, Green and Hernandez,AU,11,False
+26,SUP-00026,Gilbert, Mathews and Turner,AU,5,True
+27,SUP-00027,Miller-Mercado,AU,12,True
+28,SUP-00028,Burnett LLC,AU,9,False
+29,SUP-00029,Taylor, Clarke and Riley,AU,8,False
+30,SUP-00030,Lowe-Miller,AU,12,True
+31,SUP-00031,Walsh-Brooks,AU,11,False
+32,SUP-00032,Gordon-Short,AU,8,False
+33,SUP-00033,Alvarez-Ortiz,AU,14,False
+34,SUP-00034,Vega, Conner and Gibbs,AU,5,False
+35,SUP-00035,Cain, Marshall and Abbott,AU,12,False
+36,SUP-00036,Stanton-Wiggins,AU,12,False
+37,SUP-00037,Harris, Malone and Swanson,AU,8,False
+38,SUP-00038,Fisher, Anderson and Wade,AU,11,False
+39,SUP-00039,Williams, Lynch and Hartman,AU,4,True
+40,SUP-00040,Allen-Robinson,AU,13,False
+41,SUP-00041,Baker, Carter and Williams,AU,9,False
+42,SUP-00042,Burnett, Salas and Koch,AU,7,False
+43,SUP-00043,Campbell PLC,AU,14,False
+44,SUP-00044,Roy, White and Wheeler,AU,7,False
+45,SUP-00045,Copeland, Phillips and Beasley,AU,4,False
+46,SUP-00046,Cain and Sons,AU,3,False
+47,SUP-00047,Cochran-Brown,AU,12,True
+48,SUP-00048,Price, Meza and Scott,AU,4,True
+49,SUP-00049,Johnson-Baker,AU,17,False
+50,SUP-00050,Harper-Hughes,AU,1,False
+51,SUP-00051,Crane-Brown,AU,16,False
+52,SUP-00052,Collins-Gordon,AU,10,False
+53,SUP-00053,Anderson, Hurst and Schmidt,AU,9,False
+54,SUP-00054,Hansen Group,AU,7,False
+55,SUP-00055,Evans-Waters,AU,11,False
+56,SUP-00056,Herman, Baker and Perez,AU,9,False
+57,SUP-00057,Reid, Maxwell and Russell,AU,14,False
+58,SUP-00058,Rubio, Phillips and Foster,AU,10,False
+59,SUP-00059,Wiggins, Higgins and Duarte,AU,10,False
+60,SUP-00060,Johnson and Sons,AU,8,False
+61,SUP-00061,Bates-Mitchell,AU,9,False
+62,SUP-00062,Barron Ltd,AU,11,False
+63,SUP-00063,Melton, Reilly and Kemp,AU,3,False
+64,SUP-00064,Castaneda, Young and Hayes,AU,4,False
+65,SUP-00065,Hinton, Baker and Lee,AU,12,False
+66,SUP-00066,Peterson, Bush and Johnson,AU,10,True
+67,SUP-00067,Thomas LLC,AU,9,True
+68,SUP-00068,Rose-Anderson,AU,10,False
+69,SUP-00069,Price, Luna and Mullen,AU,11,True
+70,SUP-00070,Taylor, Kelly and Thomas,AU,7,True
+71,SUP-00071,Harper LLC,AU,6,False
+72,SUP-00072,Rasmussen and Sons,AU,10,False
+73,SUP-00073,White, Travis and Jones,AU,6,True
+74,SUP-00074,Gonzalez Ltd,AU,11,False
+75,SUP-00075,Harvey and Sons,AU,3,False
+76,SUP-00076,Simpson, Estrada and Noble,AU,14,False
+77,SUP-00077,Greene-Curtis,AU,11,False
+78,SUP-00078,Church, Lozano and Smith,AU,11,True
+79,SUP-00079,Stark Inc,AU,13,False
+80,SUP-00080,Ramsey, Weiss and Garcia,AU,16,False
+81,SUP-00081,Hamilton, Walker and Diaz,AU,14,False
+82,SUP-00082,Brown, Cruz and Johnson,AU,2,True
+83,SUP-00083,Rowe, Maxwell and Santos,AU,4,False
+84,SUP-00084,Elliott PLC,AU,7,False
+85,SUP-00085,Gates-Robles,AU,10,False
+86,SUP-00086,Kelley Inc,AU,12,False
+87,SUP-00087,Young Group,AU,7,False
+88,SUP-00088,Winters-Hart,AU,10,False
+89,SUP-00089,Garner, Hawkins and Ortiz,AU,6,False
+90,SUP-00090,Watson-Hawkins,AU,7,True
+91,SUP-00091,Harris-Little,AU,4,False
+92,SUP-00092,Riley and Sons,AU,6,False
+93,SUP-00093,Murphy-Nguyen,AU,4,True
+94,SUP-00094,Green-Vaughn,AU,6,True
+95,SUP-00095,Wilson-Gutierrez,AU,14,False
+96,SUP-00096,Morgan-Newman,AU,6,True
+97,SUP-00097,Harris PLC,AU,20,False
+98,SUP-00098,Douglas LLC,AU,11,True
+99,SUP-00099,Holden Ltd,AU,10,False
+100,SUP-00100,Shields-Carpenter,AU,6,False
+101,SUP-00101,Sanchez Group,AU,12,False
+102,SUP-00102,Caldwell, Wang and Hill,AU,7,False
+103,SUP-00103,Wise-Burgess,AU,10,False
+104,SUP-00104,Wong, Gutierrez and Holloway,AU,20,False
+105,SUP-00105,Roy, West and Ellis,AU,9,False
+106,SUP-00106,Daniels-Holland,AU,14,False
+107,SUP-00107,Edwards, Cline and Sandoval,AU,7,False
+108,SUP-00108,Price, Diaz and Moore,AU,9,False
+109,SUP-00109,Williams-Morton,AU,17,False
+110,SUP-00110,Mcgee, Ballard and Nelson,AU,7,False
+111,SUP-00111,Wilson, Russell and Carter,AU,17,False
+112,SUP-00112,Gordon-Foley,AU,12,False
+113,SUP-00113,Baker-Johnson,AU,7,False
+114,SUP-00114,Gomez PLC,AU,12,False
+115,SUP-00115,Stevens and Sons,AU,13,True
+116,SUP-00116,Adams and Sons,AU,12,False
+117,SUP-00117,Craig-James,AU,3,False
+118,SUP-00118,Gonzalez and Sons,AU,7,False
+119,SUP-00119,Hunter, Escobar and Arnold,AU,9,True
+120,SUP-00120,Wong Group,AU,9,True
+121,SUP-00121,Wang-Phillips,AU,12,False
+122,SUP-00122,Contreras LLC,AU,10,False
+123,SUP-00123,Weber and Sons,AU,4,False
+124,SUP-00124,Hernandez, Taylor and Porter,AU,11,False
+125,SUP-00125,Jensen, Sanchez and Roberts,AU,12,False
+126,SUP-00126,Lane LLC,AU,12,False
+127,SUP-00127,Copeland-Oliver,AU,14,False
+128,SUP-00128,Gibbs LLC,AU,13,False
+129,SUP-00129,Trevino, Ross and Werner,AU,11,False
+130,SUP-00130,Valencia, Gibson and Gonzalez,AU,9,False
+131,SUP-00131,Williams, Braun and Bryant,AU,3,False
+132,SUP-00132,White LLC,AU,11,False
+133,SUP-00133,Rowland Inc,AU,10,False
+134,SUP-00134,Fields, Reyes and Sims,AU,11,True
+135,SUP-00135,Hernandez Ltd,AU,4,False
+136,SUP-00136,Byrd Inc,AU,5,False
+137,SUP-00137,Nelson, Lee and Ferguson,AU,14,False
+138,SUP-00138,Johnson-Martin,AU,9,True
+139,SUP-00139,Lynch, Schmitt and White,AU,12,False
+140,SUP-00140,Williams, Lopez and Austin,AU,10,False
+141,SUP-00141,Callahan-Lee,AU,10,False
+142,SUP-00142,Robertson, Brown and Dean,AU,13,False
+143,SUP-00143,Fowler-Terry,AU,7,True
+144,SUP-00144,Mills Ltd,AU,10,True
+145,SUP-00145,Perez-Hunt,AU,8,False
+146,SUP-00146,Robles Ltd,AU,8,False
+147,SUP-00147,Turner-Smith,AU,8,False
+148,SUP-00148,Jones-Clark,AU,10,False
+149,SUP-00149,Harmon Group,AU,8,False
+150,SUP-00150,Tanner PLC,AU,15,True
+151,SUP-00151,Morris-Moon,AU,6,True
+152,SUP-00152,Burke-Grimes,AU,9,False
+153,SUP-00153,Dixon PLC,AU,8,True
+154,SUP-00154,Brown PLC,AU,15,False
+155,SUP-00155,Johns, Butler and Hansen,AU,10,False
+156,SUP-00156,Huynh LLC,AU,14,True
+157,SUP-00157,Evans, Hoffman and Schultz,AU,4,True
+158,SUP-00158,Thompson-Nunez,AU,11,False
+159,SUP-00159,Garcia-Oliver,AU,13,False

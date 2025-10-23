@@ -1,0 +1,17 @@
+sensor_ts,store_id,shelf_id,temperature_c,humidity_pct,battery_mv,reject_reason,src_filename
+2025-08-13T09:04:00,99,SHELF-033,23.63,64.41,3701,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-14T01:06:00,99,SHELF-018,20.18,49.49,3767,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-15T08:42:00,99,SHELF-006,14.84,59.87,3502,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-16T16:17:00,99,SHELF-006,18.70,81.25,3818,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-17T06:44:00,99,SHELF-008,25.05,43.44,3752,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-18T18:11:00,99,SHELF-050,22.45,72.67,3968,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-19T22:54:00,99,SHELF-024,24.30,46.20,3650,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-20T11:03:00,99,SHELF-040,16.12,53.43,3710,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-21T08:49:00,99,SHELF-003,24.49,67.42,3744,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-22T00:53:00,99,SHELF-036,19.27,54.99,3486,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-23T10:51:00,99,SHELF-010,27.90,49.05,3723,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-24T04:40:00,99,SHELF-044,24.96,64.58,3455,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-25T10:36:00,99,SHELF-028,26.99,51.75,3514,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-26T13:05:00,99,SHELF-010,15.58,32.10,3412,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-27T19:57:00,99,SHELF-045,22.96,58.11,3764,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv
+2025-08-28T16:58:00,99,SHELF-046,15.08,44.29,3508,invalid:sensor_ts,data_raw\sensors\store_id=99\month=2025-08\part-00001.csv

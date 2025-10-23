@@ -1,0 +1,56 @@
+version: 2
+
+models:
+  - name: dim_supplier
+    description: "Supplier dimension with derived attributes like supplier tier and regional mapping."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: supplier_sk
+        description: "Surrogate key for the supplier dimension."
+        data_type: varchar
+        tests: [unique, not_null]
+
+      - name: supplier_id
+        description: "Business key from source systems."
+        data_type: bigint
+        tests: [not_null]
+
+      - name: name
+        description: "Name of the supplier."
+        data_type: varchar
+
+      - name: country_code
+        description: "ISO 3166-1 alpha-2 country code of the supplier."
+        data_type: varchar
+        tests: [not_null]
+
+      - name: supplier_code
+        description: "The unique natural key for the supplier."
+        data_type: varchar
+        tests: [unique, not_null]
+
+      - name: lead_time_days
+        description: "The average lead time for the supplier in days."
+        data_type: integer
+        
+      - name: preferred
+        description: "A flag indicating if the supplier is a preferred vendor."
+        data_type: boolean
+        
+      - name: supplier_tier
+        description: "A derived tier based on lead time (Tier A, Tier B, Tier C)."
+        data_type: varchar
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Tier A', 'Tier B', 'Tier C']
+
+      - name: country_region
+        description: "Geographical region derived from the country code."
+        data_type: varchar
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Oceania', 'North America', 'Europe', 'Rest of World']

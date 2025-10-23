@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: stg_sensors
+    description: "Staging model for sensor readings, cleaning and deduplicating raw data."
+    config:
+      contract:
+        enforced: true
+    columns:
+      - name: sensor_ts
+        description: "The timestamp of the sensor reading. Part of the composite unique key."
+        data_type: timestamp
+        tests:
+          - not_null
+
+      - name: shelf_id
+        description: "The unique identifier for the shelf. Part of the composite unique key."
+        data_type: bigint
+        tests:
+          - not_null
+         
+      
+      - name: store_id
+        description: "The unique identifier for the store. Part of the composite unique key."
+        data_type: bigint
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_stores')
+              field: store_id
+
+      - name: temperature_c
+        description: "The temperature reading in Celsius."
+        data_type: double
+
+      - name: humidity_pct
+        description: "The humidity reading as a percentage."
+        data_type: double
+
+      - name: battery_mv
+        description: "The battery voltage reading in millivolts."
+        data_type: int
+
+      - name: ingestion_ts
+        description: "The timestamp when the record was ingested into the Bronze layer."
+        data_type: timestamp
+      
+      - name: src_filename
+        description: "The name of the source file."
+        data_type: varchar
+
+      - name: src_row_hash
+        description: "A hash of the original source row for lineage tracking."
+        data_type: varchar
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - sensor_ts
+            - shelf_id
+            - store_id
